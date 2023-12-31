@@ -1,0 +1,19 @@
+## Create Date Column 
+Date = DATE('updated_spotify-2023'[released_year], 'updated_spotify-2023'[released_month], 'updated_spotify-2023'[released_day])
+
+## Most played Song
+_max streams = MAX('updated_spotify-2023'[streams])
+
+## Number of streams of top songs
+_Top Song Streams = 
+CALCULATE(
+    SUM('updated_spotify-2023'[streams]),
+    'updated_spotify-2023'[streams] = MAX('updated_spotify-2023'[streams])
+)
+
+## Calculate the percent difference between top and average
+_Top song vs avg song val = 
+DIVIDE(
+    [_Top Song Streams] - [_Average Stream per year] ,
+    [_Average Stream per year]
+)
